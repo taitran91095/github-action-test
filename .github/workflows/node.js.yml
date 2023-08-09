@@ -32,4 +32,4 @@ jobs:
           git config --global user.name "Tai Tran"
           gh pr create --title "Release: Bump Bundle Version" -B main -b ""
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: "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"
