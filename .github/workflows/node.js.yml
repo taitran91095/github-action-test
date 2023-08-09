@@ -31,3 +31,5 @@ jobs:
           git config --global user.email "tai.phuc.tran@gmail.com"
           git config --global user.name "Tai Tran"
           gh pr create --title "Release: Bump Bundle Version" -B main -b ""
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
