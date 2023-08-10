@@ -71,4 +71,4 @@ jobs:
           git pull
           git add .
           git commit -m "Add prod build"
-          git push origin main
+          git push origin test
