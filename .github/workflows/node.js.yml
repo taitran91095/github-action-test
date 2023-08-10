@@ -27,9 +27,44 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - run: |
+      - run: echo "This is the Fourth File" > fourthFile.txt
+      - name: Cache iOS File
+        id: cache-ios-file
+        uses: actions/cache/save@v3
+        env:
+          cache-name: cache-ios-file
+        with:
+          path: ./
+          key: ios-build-${{ github.run_id }}
+          restore-keys: ios-build-
+  rsync:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: test/cicdtest
+          path: "~/cxp-carcheck-b2e-app-dist-2"
+      - name: Cache iOS File
+        id: cache-ios-file
+        uses: actions/cache/restore@v3
+        env:
+          cache-name: cache-ios-file
+        with:
+          path: ./
+          key: ios-build-${{ github.run_id }}
+      - run: rsync -a ~/cxp-carcheck-b2e-app-dist/ ~/cxp-carcheck-b2e-app-dist-2/;
+      - name: Upload iOS
+        working-directory: ~/cxp-carcheck-b2e-app-dist-2
+        run: |
           git config --global user.email "tai.phuc.tran@gmail.com"
           git config --global user.name "Tai Tran"
-          gh pr create --title "Release: Bump Bundle Version" -B main -b ""
-        env:
-          GITHUB_TOKEN: "${{ secrets.USER_TOKEN }}"
+          git pull
+          git add .
+          git commit -m "Add prod build"
+          git push origin test/cicdtest
