@@ -62,6 +62,7 @@ jobs:
       - name: Upload iOS
         working-directory: ~/cxp-carcheck-b2e-app-dist-2
         run: |
+          pwd
           ls -la
           git config --global user.email "tai.phuc.tran@gmail.com"
           git config --global user.name "Tai Tran"
