@@ -58,7 +58,7 @@ jobs:
       - name: Fix check directory
         run: |
           ls -la
-      - run: rsync -PHACcviuma --copy-unsafe-links --exclude="*~" ./ ~/cxp-carcheck-b2e-app-dist-2/;
+      - run: rsync -av --exclude '.*' ./ ~/cxp-carcheck-b2e-app-dist-2/
       - name: Upload iOS
         working-directory: ~/cxp-carcheck-b2e-app-dist-2
         run: |
