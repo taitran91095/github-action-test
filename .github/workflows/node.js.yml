@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          path: "~/cxp-carcheck-b2e-app-dist-2"
+          path: cxp-carcheck-b2e-app-dist-2
       - name: Cache iOS File
         id: cache-ios-file
         uses: actions/cache/restore@v3
@@ -58,9 +58,11 @@ jobs:
       - name: Fix check directory
         run: |
           ls -la
-      - run: rsync -av --exclude '.*' ./ ~/cxp-carcheck-b2e-app-dist-2/
+      - name: Copy File
+        # working-directory: ~/cxp-carcheck-b2e-app-dist-2
+        run: rsync -av --exclude '.*' ./ cxp-carcheck-b2e-app-dist-2/
       - name: Upload iOS
-        working-directory: ~/cxp-carcheck-b2e-app-dist-2
+        working-directory: cxp-carcheck-b2e-app-dist-2
         run: |
           pwd
           ls -la
