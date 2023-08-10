@@ -6,8 +6,6 @@ name: Node.js CI
 on:
   push:
     branches: ["test"]
-  pull_request:
-    branches: ["main"]
 
 jobs:
   build:
@@ -48,7 +46,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: test/cicdtest
           path: "~/cxp-carcheck-b2e-app-dist-2"
       - name: Cache iOS File
         id: cache-ios-file
@@ -67,4 +64,4 @@ jobs:
           git pull
           git add .
           git commit -m "Add prod build"
-          git push origin test/cicdtest
+          git push origin main
