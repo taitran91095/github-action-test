@@ -55,7 +55,7 @@ jobs:
         with:
           path: ./
           key: ios-build-${{ github.run_id }}
-      - run: rsync -a ~/cxp-carcheck-b2e-app-dist/ ~/cxp-carcheck-b2e-app-dist-2/;
+      - run: rsync -a ./ ~/cxp-carcheck-b2e-app-dist-2/;
       - name: Upload iOS
         working-directory: ~/cxp-carcheck-b2e-app-dist-2
         run: |
